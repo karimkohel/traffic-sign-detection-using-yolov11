@@ -2,10 +2,7 @@
 from ultralytics import YOLO
 import cv2
 
-detector = YOLO("./model/traffic_sign_detector.pt", task="detect")
-
-def run_video(video_path: str, state: str, visualize: bool = True) -> tuple[int, float]:
-
+def run_video(video_path: str, detector, state: str, visualize: bool = True) -> tuple[int, float]:
 
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
@@ -53,6 +50,8 @@ if __name__ == "__main__":
 
     video_path = "./data/input/traffic_signs.mp4"
     visualize = True
-    
-    run_video(video_path, "Before", visualize)
-    run_video(video_path, "After", visualize)
+
+    detector = YOLO("./model/traffic_sign_detector.pt", task="detect")
+
+    run_video(video_path, detector, "Before", visualize)
+    run_video(video_path, detector, "After", visualize)
