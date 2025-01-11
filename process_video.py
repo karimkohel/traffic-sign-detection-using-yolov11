@@ -16,7 +16,7 @@ def run_video(video_path: str, detector, state: str, visualize: bool = True) -> 
     while ret:
         ret, frame = cap.read()
         
-        detections = detector(frame)
+        detections = detector(frame, device='cuda')
         
         for detection in detections:
                 for bbox in detection.boxes:
@@ -52,6 +52,7 @@ if __name__ == "__main__":
     visualize = True
 
     detector = YOLO("./model/traffic_sign_detector.pt", task="detect")
+    detector.to('cuda')
 
     run_video(video_path, detector, "Before", visualize)
     run_video(video_path, detector, "After", visualize)
