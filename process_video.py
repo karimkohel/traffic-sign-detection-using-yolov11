@@ -1,7 +1,7 @@
 # import libraries
 import cv2
 
-def process_video(video_path: str, detector, state: str, visualize: bool = True) -> tuple[int, float]:
+def process_video(video_path: str, detector, state: str, visualize: bool = True) -> tuple[int, float, tuple[int]]:
     """
     Processes a video to detect traffic signs using a given detector.
     Args:
@@ -12,13 +12,13 @@ def process_video(video_path: str, detector, state: str, visualize: bool = True)
     Returns:
         tuple[int, float, list[tuple[int]]]: A tuple containing the total number of detections, 
                                              the average confidence of detections, 
-                                             and a list of detected bounding boxes.
+                                             and a list of detected bounding boxes. (x1, y1, x2, y2, frameNum)
     """
 
 
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
-        print("Unable to open the input file")
+        print("Unable to open the input file: ", video_path)
         exit()
     ret = True
 
@@ -56,8 +56,12 @@ def process_video(video_path: str, detector, state: str, visualize: bool = True)
     cap.release()
     cv2.destroyAllWindows()
 
-    avgConfidence = sum(confidences) / len(confidences)
-    avgConfidence = avgConfidence.item() * 100
+    if len(confidences) == 0:
+        print("No detections were made")
+        return 0, 0, []
+    else:
+        avgConfidence = sum(confidences) / len(confidences)
+        avgConfidence = avgConfidence.item() * 100
 
     print("-----------------------------------")
     print(f"Stats {state} Fooling:")
