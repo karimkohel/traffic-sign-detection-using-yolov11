@@ -1,3 +1,6 @@
 *pycache*
 *overflow*
 data/
+*.pyc
+*.pyo
+*.pyd
