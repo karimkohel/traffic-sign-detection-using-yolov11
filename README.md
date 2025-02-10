@@ -17,8 +17,7 @@
 
 ## Data
 
-The [Self-Driving Cars Dataset](https://universe.roboflow.com/selfdriving-car-qtywx/self-driving-cars-lfjou/dataset/6) is used to train the traffic sign detection model. It contains **4969** total images
-split into train, val and test sets with **3530**, **801** and **638** images of dimension `416x416` respectively. The dataset contains images of 15 different traffic signs.
+The GTSRB dataset was used as data for training
 
 The classes available in the dataset are:
 
