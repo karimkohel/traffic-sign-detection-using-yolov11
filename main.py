@@ -17,3 +17,7 @@ if __name__ == "__main__":
     apply_uap(ogVideoPath, attackedVideoPath, detections)
     
     _, _, detections = process_video(attackedVideoPath, detector, "fooling", visualize)
+
+    # revert to the original yolov11 that was used for training the uap noise
+    # search for more metrics in other papers
+    # test against different scenarios (speed of car, weather, day/night, etc)
